@@ -1,0 +1,64 @@
+<div class="container-fluid">
+  <div class="row no-gutter">
+    <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+    <div class="col-md-8 col-lg-6">
+      <div class="login d-flex align-items-center py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 col-lg-8 mx-auto">
+                <br/>
+                <div class="form-label-group">
+                  <%="Prénom :  #{@user.first_name}"%>
+                </div>
+                <br/>
+                <div class="form-label-group">
+                  <%="Nom :  #{@user.last_name}"%>
+                </div>
+                <br/>
+                <div class="form-label-group">
+                  <%="email :  #{@user.email}"%>
+                </div>
+                <br/>
+                <div class="form-label-group">
+                  <%="Description :  #{@user.description}"%>
+                </div>
+                <br/>
+                <div class="form-label-group">
+                  <%="Membre depuis le :  #{@user.created_at.to_date}"%>
+                </div>
+                <br/>
+                <% if @user == current_user %>
+                <a class="btn btn-lg btn-danger btn-block btn-login text-uppercase font-weight-bold mb-2" <%= link_to "Editer", edit_user_registration_path%>
+                <%end%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="row p-5 mt-3 mb-3 bg-dark text-light">
+  <% if @events.size >0%>
+    <%="#{@user.first_name} propose #{@events.size} event(s) à venir :"%>
+  <%else%>
+    <%="#{@user.first_name} ne propose pas d'event à venir"%>
+  <%end%>
+</div>    
+<div class="card-deck mx-3">
+    <% @events.all.each do |event| %>
+       <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <%= image_tag "#{["event.jpg","event2.jpg","event3.jpg","event4.jpg","event5.jpg"].sample}", class:"card-img-top" %>
+          <div class="card-body">
+            <h4 class="card-title"><%=event.title%></h4>
+            <p class="card-text"><%=event.description%></p>
+          </div>
+          <div class="card-footer">
+            <a class="btn btn-danger" <%= link_to "Voir +", event_path(event.id)%>
+          </div>
+        </div>
+      </div>
+    <%end%>
+  </div>
+  </div>
+
+</div>
